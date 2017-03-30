@@ -4,8 +4,7 @@ Title: Tools for handling acoustic televiewer data
 Version: 0.0.1
 Author: Jonathan Kennel, Beth Parker
 Maintainer: Jonathan Kennel <jkennel@uoguelph.ca>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: These are a few tools for working with acoustic televiewer (ATV) data in r. Methods are designed to be function efficiently and to be an open source utility for handling ATV data.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
