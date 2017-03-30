@@ -11,6 +11,9 @@ read_las(file_name, na_value = -99999)
 
 \item{na_value}{value for NAs}
 }
+\value{
+matrix of data
+}
 \description{
 read_las
 }

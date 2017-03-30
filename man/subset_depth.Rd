@@ -7,7 +7,16 @@
 subset_depth(x, top, bot, elev = FALSE)
 }
 \arguments{
-\item{elev}{}
+\item{x}{raster}
+
+\item{top}{top value}
+
+\item{bot}{bottom value}
+
+\item{elev}{whether values are in elevation or depth}
+}
+\value{
+subsetted raster
 }
 \description{
 subset_depth

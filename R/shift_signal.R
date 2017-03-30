@@ -4,10 +4,9 @@
 #' @param phase the amount to shift
 #' @param direction the direction to shift
 #'
-#' @return
-#' @export
+#' @return shifted signal
 #'
-#' @examples
+#' @export
 shift_signal <- function(x, phase, direction = 1){
 
   len   <- NCOL(x)

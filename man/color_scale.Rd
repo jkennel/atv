@@ -9,6 +9,12 @@ color_scale(n = 100)
 \arguments{
 \item{n}{number of colors}
 }
+\value{
+set of colors (dark blue, dark red, yellow like wellCAD)
+}
 \description{
 color_scale
+}
+\examples{
+color_scale(10)
 }

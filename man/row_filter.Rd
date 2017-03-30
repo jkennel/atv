@@ -13,9 +13,12 @@ row_filter(x, dif = 4, k = 21, probs = 0.5, ...)
 
 \item{k}{width of moving window; must be an integer between one and n}
 
-\item{probs}{numeric vector of probabilities with values in [0,1] range used by runquantile. For example Probs=c(0,0.5,1) would be equivalent to running runmin, runmed and runmax. Same as probs in quantile function.}
+\item{probs}{numeric vector of probabilities with values in \link{0,1} range used by runquantile. For example Probs=c(0,0.5,1) would be equivalent to running runmin, runmed and runmax. Same as probs in quantile function.}
 
 \item{...}{arguments to pass to runquantile}
+}
+\value{
+matrix of values masked with NA
 }
 \description{
 row_filter

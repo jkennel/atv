@@ -1,14 +1,27 @@
 Package: atv
 Type: Package
 Title: Tools for handling acoustic televiewer data
-Version: 0.1.0
-Author: Jonathan Kennel
+Version: 0.0.1
+Author: Jonathan Kennel, Beth Parker
 Maintainer: Jonathan Kennel <jkennel@uoguelph.ca>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: Rcpp (>= 0.12.10), raster, caTools
-LinkingTo: Rcpp
+Depends: 
+Imports:
+    Rcpp,
+    RcppParallel,
+    raster, 
+    caTools
+LinkingTo: Rcpp, RcppParallel, RcppArmadillo
+SystemRequirements: GNU make, C++11
 RoxygenNote: 6.0.1
+NeedsCompilation: yes
+Suggests: testthat,
+    covr,
+    knitr, 
+    rmarkdown
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)

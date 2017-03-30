@@ -1,11 +1,14 @@
+
 #' color_scale
 #'
 #' @param n number of colors
 #'
-#' @return
+#' @return set of colors (dark blue, dark red, yellow like wellCAD)
+#'
 #' @export
 #'
 #' @examples
+#' color_scale(10)
 color_scale <- function(n = 100) {
-  colorRampPalette(c('dark blue', 'dark red', 'yellow'))(n)
+  grDevices::colorRampPalette(c('dark blue', 'dark red', 'yellow'))(n)
 }

@@ -1,13 +1,11 @@
-#'------------------------------------------------------------------------------
 #' create_raster
 #'
 #' @param x the matrix from a .las file
 #' @param elev are values in elevation
 #'
 #' @return raster
-#' @export
 #'
-#' @examples
+#' @export
 create_raster <- function(x, elev = FALSE){
   if (elev) {
     ymx <- max(x[,1], na.rm = TRUE)

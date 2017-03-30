@@ -3,10 +3,9 @@
 #' @param file_name name of file to read
 #' @param na_value value for NAs
 #'
-#' @return
-#' @export
+#' @return matrix of data
 #'
-#' @examples
+#' @export
 read_las <- function(file_name, na_value = -99999){
 
   # ASCII FILE TO READ
@@ -25,8 +24,8 @@ read_las <- function(file_name, na_value = -99999){
   ang <- ang[!is.na(ang)]
 
   # CREATE THE MATRIX OF VALUES
-  val <- matrix(as.numeric(unlist(strsplit(las[(he+1):NROW(las)], ','))),
-                ncol=length(ang) + 1, byrow = TRUE)
+  val <- matrix(as.numeric(unlist(strsplit(las[(he + 1):NROW(las)], ','))),
+                ncol = length(ang) + 1, byrow = TRUE)
 
   # SET THE NA VALUE
   val[which(val == na_value)] <- NA_real_

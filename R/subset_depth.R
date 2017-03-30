@@ -1,14 +1,13 @@
 #' subset_depth
 #'
-#' @param x
-#' @param top
-#' @param bot
-#' @param elev
+#' @param x raster
+#' @param top top value
+#' @param bot bottom value
+#' @param elev whether values are in elevation or depth
 #'
-#' @return
+#' @return subsetted raster
+#'
 #' @export
-#'
-#' @examples
 subset_depth <- function(x, top, bot, elev = FALSE) {
 
   if (elev) {

@@ -2,8 +2,7 @@
 % Please edit documentation in R/create_raster.R
 \name{create_raster}
 \alias{create_raster}
-\title{------------------------------------------------------------------------------
-create_raster}
+\title{create_raster}
 \usage{
 create_raster(x, elev = FALSE)
 }
@@ -16,6 +15,5 @@ create_raster(x, elev = FALSE)
 raster
 }
 \description{
-------------------------------------------------------------------------------
 create_raster
 }
