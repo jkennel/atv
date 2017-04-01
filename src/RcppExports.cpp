@@ -30,3 +30,40 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// convert_to_amplitude_phase
+arma::mat convert_to_amplitude_phase(arma::mat coefs);
+RcppExport SEXP atv_convert_to_amplitude_phase(SEXP coefsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type coefs(coefsSEXP);
+    rcpp_result_gen = Rcpp::wrap(convert_to_amplitude_phase(coefs));
+    return rcpp_result_gen;
+END_RCPP
+}
+// amplitude_phase_adjust
+arma::mat amplitude_phase_adjust(arma::mat coefs, int n, bool intercept);
+RcppExport SEXP atv_amplitude_phase_adjust(SEXP coefsSEXP, SEXP nSEXP, SEXP interceptSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type coefs(coefsSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< bool >::type intercept(interceptSEXP);
+    rcpp_result_gen = Rcpp::wrap(amplitude_phase_adjust(coefs, n, intercept));
+    return rcpp_result_gen;
+END_RCPP
+}
+// amplitude_phase_adjust2
+arma::mat amplitude_phase_adjust2(arma::mat coefs, int n, bool intercept);
+RcppExport SEXP atv_amplitude_phase_adjust2(SEXP coefsSEXP, SEXP nSEXP, SEXP interceptSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type coefs(coefsSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< bool >::type intercept(interceptSEXP);
+    rcpp_result_gen = Rcpp::wrap(amplitude_phase_adjust2(coefs, n, intercept));
+    return rcpp_result_gen;
+END_RCPP
+}

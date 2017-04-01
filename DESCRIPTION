@@ -13,7 +13,7 @@ Imports:
     Rcpp,
     RcppParallel,
     raster, 
-    caTools
+    RcppRoll
 LinkingTo: Rcpp, RcppParallel, RcppArmadillo
 SystemRequirements: GNU make, C++11
 RoxygenNote: 6.0.1
