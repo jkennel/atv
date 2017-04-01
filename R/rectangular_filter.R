@@ -2,8 +2,8 @@
 #'
 #' @param x matrix of data
 #' @param dif difference between values and the moving quantile
-#' @param k width of moving window; must be an integer between one and n
-#' @param probs numeric vector of probabilities with values in [0,1] range used by runquantile. For example Probs=c(0,0.5,1) would be equivalent to running runmin, runmed and runmax. Same as probs in quantile function.
+#' @param k_v width of vertical moving window;
+#' @param k_h width of horizontal moving window;
 #' @param ... arguments to pass to runquantile
 #'
 #' @return matrix of values masked with NA
