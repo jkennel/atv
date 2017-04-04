@@ -7,14 +7,15 @@
 using namespace Rcpp;
 
 // create_sin_cos
-arma::mat create_sin_cos(int n_rows, int n_curves);
-RcppExport SEXP atv_create_sin_cos(SEXP n_rowsSEXP, SEXP n_curvesSEXP) {
+arma::mat create_sin_cos(int n_rows, int n_curves, bool intercept);
+RcppExport SEXP atv_create_sin_cos(SEXP n_rowsSEXP, SEXP n_curvesSEXP, SEXP interceptSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int >::type n_rows(n_rowsSEXP);
     Rcpp::traits::input_parameter< int >::type n_curves(n_curvesSEXP);
-    rcpp_result_gen = Rcpp::wrap(create_sin_cos(n_rows, n_curves));
+    Rcpp::traits::input_parameter< bool >::type intercept(interceptSEXP);
+    rcpp_result_gen = Rcpp::wrap(create_sin_cos(n_rows, n_curves, intercept));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -51,19 +52,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
     Rcpp::traits::input_parameter< bool >::type intercept(interceptSEXP);
     rcpp_result_gen = Rcpp::wrap(amplitude_phase_adjust(coefs, n, intercept));
-    return rcpp_result_gen;
-END_RCPP
-}
-// amplitude_phase_adjust2
-arma::mat amplitude_phase_adjust2(arma::mat coefs, int n, bool intercept);
-RcppExport SEXP atv_amplitude_phase_adjust2(SEXP coefsSEXP, SEXP nSEXP, SEXP interceptSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type coefs(coefsSEXP);
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    Rcpp::traits::input_parameter< bool >::type intercept(interceptSEXP);
-    rcpp_result_gen = Rcpp::wrap(amplitude_phase_adjust2(coefs, n, intercept));
     return rcpp_result_gen;
 END_RCPP
 }

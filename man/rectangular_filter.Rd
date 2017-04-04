@@ -11,11 +11,11 @@ rectangular_filter(x, dif = 4, k_h = 20, k_v = 4, ...)
 
 \item{dif}{difference between values and the moving quantile}
 
+\item{k_h}{width of horizontal moving window;}
+
+\item{k_v}{width of vertical moving window;}
+
 \item{...}{arguments to pass to runquantile}
-
-\item{k}{width of moving window; must be an integer between one and n}
-
-\item{probs}{numeric vector of probabilities with values in \link{0,1} range used by runquantile. For example Probs=c(0,0.5,1) would be equivalent to running runmin, runmed and runmax. Same as probs in quantile function.}
 }
 \value{
 matrix of values masked with NA

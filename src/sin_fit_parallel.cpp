@@ -27,19 +27,37 @@ using namespace RcppParallel;
 //' @export
 //'
 // [[Rcpp::export]]
-arma::mat create_sin_cos(int n_rows, int n_curves){
+arma::mat create_sin_cos(int n_rows, int n_curves, bool intercept = true){
 
-  int n_cols = 2 * n_curves + 1;
+  if (n_rows <= 0 ) {
+    stop("n_rows must be greater than 0");
+  }
+  if (n_curves <= 0) {
+    stop("n_curves must be greater than 0");
+  }
+
+  int n_cols;
+
+  if (intercept) {
+    n_cols = 2 * n_curves + 1;
+  } else {
+    n_cols = 2 * n_curves;
+  }
+
   arma::mat x = arma::mat(n_rows, n_cols);
 
-  double cycle = 2 * M_PI - (2 * M_PI) / n_rows;
+  double cycle = 2 * M_PI - ((2 * M_PI) / n_rows);
 
   // set up model matrix
   for (int i = 0; i < n_curves; i++) {
     x.col(i) = sin(arma::linspace<arma::colvec>(0, (i + 1) * cycle, n_rows));
     x.col(i + n_curves) = cos(arma::linspace<arma::colvec>(0, (i + 1) * cycle, n_rows));
   }
-  x.col(n_cols-1).fill(1.0);
+
+  // use intercept in regression?
+  if (intercept) {
+    x.col(n_cols-1).fill(1.0);
+  }
 
   return(x);
 }
@@ -115,9 +133,9 @@ arma::mat sin_fit_ols_parallel(arma::mat y, int n_curves) {
 //==============================================================================
 //' convert_to_amplitude_phase
 //'
-//' fit sin curves to atv data.
+//' convert regression fit to amplitude and phase
 //'
-//' @param coefficient matrix of data
+//' @param coefs coefficient matrix of data
 //'
 //' @return phase and amplitude
 //'
@@ -141,10 +159,58 @@ arma::mat convert_to_amplitude_phase(arma::mat coefs) {
 
 }
 
+// //==============================================================================
+// //' amplitude_phase_adjust_approx
+// //'
+// //' adjust curves based on regression stats (approximate - only whole pixel shifts allowed) (faster and simpler code)
+// //'
+// //' @param coefs matrix of data
+// //' @param n number of values per trace
+// //' @param intercept whether to include an intercept
+// //'
+// //' @return phase and amplitude
+// //'
+// //' @export
+// //'
+// // [[Rcpp::export]]
+// arma::mat amplitude_phase_adjust_approx(arma::mat coefs, int n, bool intercept=true) {
+//
+//   double cycle = 2 * M_PI - (2 * M_PI / n);
+//   arma::rowvec cos_seq = cos(arma::linspace<arma::rowvec>(0, cycle, n));
+//   int n_coefs = coefs.n_cols;
+//   int n_trace = coefs.n_rows;
+//   int n_curves = n_coefs / 2;
+//
+//   arma::rowvec coefs_row(n_coefs);
+//   arma::mat curves(n_curves, n);
+//
+//   arma::mat output = coefs.col(0) * cos_seq;
+//
+//   int sh = 0;
+//
+//   for (int i; i < n_trace; i++) {
+//     if (arma::is_finite(coefs.col(1)(i))){
+//
+//       sh = round((coefs.col(1)(i) / (2*M_PI)) * n);
+//
+//       if (intercept) {
+//         output.row(i) = shift(output.row(i), -sh) + coefs.col(2)(i);
+//       } else {
+//         output.row(i) = shift(output.row(i), -sh);
+//       }
+//
+//     }
+//   }
+//
+//   return(output);
+//
+// }
+
+
 //==============================================================================
-//' convert_to_amplitude_phase
+//' amplitude_phase_adjust
 //'
-//' fit sin curves to atv data.
+//' adjust curves based on regression stats
 //'
 //' @param coefs matrix of data
 //' @param n number of values per trace
@@ -156,51 +222,6 @@ arma::mat convert_to_amplitude_phase(arma::mat coefs) {
 //'
 // [[Rcpp::export]]
 arma::mat amplitude_phase_adjust(arma::mat coefs, int n, bool intercept) {
-
-  double cycle = 2 * M_PI - (2 * M_PI / n);
-  arma::rowvec cos_seq = cos(arma::linspace<arma::rowvec>(0, cycle, n));
-  int n_coefs = coefs.n_cols;
-  int n_trace = coefs.n_rows;
-  int n_curves = n_coefs / 2;
-
-  arma::rowvec coefs_row(n_coefs);
-  arma::mat curves(n_curves, n);
-
-  arma::mat output = coefs.col(0) * cos_seq;
-
-  int sh = 0;
-
-  for (int i; i < n_trace; i++) {
-    if (arma::is_finite(coefs.col(1)(i))){
-      sh = round((coefs.col(1)(i) / (2*M_PI)) * n);
-      if (intercept) {
-        output.row(i) = shift(output.row(i), -sh) + coefs.col(2)(i);
-      } else {
-        output.row(i) = shift(output.row(i), -sh);
-      }
-    }
-  }
-
-  return(output);
-
-}
-
-
-//==============================================================================
-//' convert_to_amplitude_phase
-//'
-//' fit sin curves to atv data.
-//'
-//' @param coefs matrix of data
-//' @param n number of values per trace
-//' @param intercept whether to include an intercept
-//'
-//' @return phase and amplitude
-//'
-//' @export
-//'
-// [[Rcpp::export]]
-arma::mat amplitude_phase_adjust2(arma::mat coefs, int n, bool intercept) {
 
   double cycle = 2 * M_PI - (2 * M_PI / n);
   int n_coefs = coefs.n_cols;
@@ -221,7 +242,7 @@ arma::mat amplitude_phase_adjust2(arma::mat coefs, int n, bool intercept) {
     coefs_row = coefs.row(j);
 
     for (int i = 0; i < n_curves; i++) {
-      adjust += coefs_row(i) * cos(cos_seq * (i+1) + (coefs_row(i+1)));
+      adjust += coefs_row(i) * cos( cos_seq * (i+1) + (coefs_row(i+n_curves)));
     }
 
     if (intercept){

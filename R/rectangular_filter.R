@@ -2,8 +2,8 @@
 #'
 #' @param x matrix of data
 #' @param dif difference between values and the moving quantile
-#' @param k_v width of vertical moving window;
 #' @param k_h width of horizontal moving window;
+#' @param k_v width of vertical moving window;
 #' @param ... arguments to pass to runquantile
 #'
 #' @return matrix of values masked with NA

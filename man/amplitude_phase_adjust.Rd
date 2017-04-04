@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{amplitude_phase_adjust}
 \alias{amplitude_phase_adjust}
-\title{convert_to_amplitude_phase}
+\title{amplitude_phase_adjust}
 \usage{
 amplitude_phase_adjust(coefs, n, intercept)
 }
@@ -17,5 +17,5 @@ amplitude_phase_adjust(coefs, n, intercept)
 phase and amplitude
 }
 \description{
-fit sin curves to atv data.
+adjust curves based on regression stats
 }

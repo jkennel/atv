@@ -16,8 +16,8 @@
 #'
 #' @export
 #'
-create_sin_cos <- function(n_rows, n_curves) {
-    .Call('atv_create_sin_cos', PACKAGE = 'atv', n_rows, n_curves)
+create_sin_cos <- function(n_rows, n_curves, intercept = TRUE) {
+    .Call('atv_create_sin_cos', PACKAGE = 'atv', n_rows, n_curves, intercept)
 }
 
 #' sin_fit_ols_parallel
@@ -37,9 +37,9 @@ sin_fit_ols_parallel <- function(y, n_curves) {
 
 #' convert_to_amplitude_phase
 #'
-#' fit sin curves to atv data.
+#' convert regression fit to amplitude and phase
 #'
-#' @param coefficient matrix of data
+#' @param coefs coefficient matrix of data
 #'
 #' @return phase and amplitude
 #'
@@ -49,9 +49,9 @@ convert_to_amplitude_phase <- function(coefs) {
     .Call('atv_convert_to_amplitude_phase', PACKAGE = 'atv', coefs)
 }
 
-#' convert_to_amplitude_phase
+#' amplitude_phase_adjust
 #'
-#' fit sin curves to atv data.
+#' adjust curves based on regression stats
 #'
 #' @param coefs matrix of data
 #' @param n number of values per trace
@@ -63,21 +63,5 @@ convert_to_amplitude_phase <- function(coefs) {
 #'
 amplitude_phase_adjust <- function(coefs, n, intercept) {
     .Call('atv_amplitude_phase_adjust', PACKAGE = 'atv', coefs, n, intercept)
-}
-
-#' convert_to_amplitude_phase
-#'
-#' fit sin curves to atv data.
-#'
-#' @param coefs matrix of data
-#' @param n number of values per trace
-#' @param intercept whether to include an intercept
-#'
-#' @return phase and amplitude
-#'
-#' @export
-#'
-amplitude_phase_adjust2 <- function(coefs, n, intercept) {
-    .Call('atv_amplitude_phase_adjust2', PACKAGE = 'atv', coefs, n, intercept)
 }
 

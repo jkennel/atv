@@ -4,7 +4,7 @@
 \alias{create_sin_cos}
 \title{create_sin_cos}
 \usage{
-create_sin_cos(n_rows, n_curves)
+create_sin_cos(n_rows, n_curves, intercept = TRUE)
 }
 \arguments{
 \item{n_rows}{the number of rows in the atv image}

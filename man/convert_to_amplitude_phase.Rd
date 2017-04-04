@@ -7,11 +7,11 @@
 convert_to_amplitude_phase(coefs)
 }
 \arguments{
-\item{coefficient}{matrix of data}
+\item{coefs}{coefficient matrix of data}
 }
 \value{
 phase and amplitude
 }
 \description{
-fit sin curves to atv data.
+convert regression fit to amplitude and phase
 }
