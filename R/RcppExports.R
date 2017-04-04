@@ -7,6 +7,7 @@
 #'
 #' @param n_rows the number of rows in the atv image
 #' @param n_curves the number of sin/cos curves to use
+#' @param intercept whether to include an intercept
 #'
 #' @return fitting coefficients
 #'
