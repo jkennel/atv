@@ -10,6 +10,8 @@ create_sin_cos(n_rows, n_curves, intercept = TRUE)
 \item{n_rows}{the number of rows in the atv image}
 
 \item{n_curves}{the number of sin/cos curves to use}
+
+\item{intercept}{whether to include an intercept}
 }
 \value{
 fitting coefficients
